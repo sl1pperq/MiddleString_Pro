@@ -1,0 +1,25 @@
+#include "middle_str.h"
+#include <string>
+using namespace std;
+
+bool itc_isIp(string str) {
+    int num = 0;
+    int counter = 0;
+    for (int i = 0; i < find_len(str); i++) {
+        if (str[i] == '.') {
+            if (num < 0 || num > 255) {
+                return false;
+            }
+            num = 0;
+            counter++;
+        } else if (itc_isDigit(str[i])) {
+            num = num * 10 + (str[i] - '0');
+        } else {
+            return false;
+        }
+    }
+    if (counter != 3 || num < 0 || num > 255) {
+        return false;
+    }
+    return true;
+}
